@@ -28,7 +28,10 @@ var srcs = []*bytes.Reader{
 
 func ExampleReader() {
 	// example for downloading http body with rate limit.
-	resp, _ := http.Get("http://example.com")
+	resp, err := http.Get("http://example.com")
+	if err != nil {
+		return
+	}
 	defer resp.Body.Close()
 
 	reader := shapeio.NewReader(resp.Body)
